@@ -180,3 +180,18 @@ INFO 2025-07-30 00:10:29,492 basehttp 18956 6184 "GET /admin/auth/group/ HTTP/1.
 INFO 2025-07-30 00:10:29,551 basehttp 18956 6184 "GET /admin/jsi18n/ HTTP/1.1" 200 3343
 INFO 2025-07-30 00:10:57,285 autoreload 18956 18948 E:\Biochar\biochar\apps\carbon_api\admin.py changed, reloading.
 INFO 2025-07-30 00:10:57,945 autoreload 13952 14036 Watching for file changes with StatReloader
+INFO 2025-07-30 00:11:01,744 basehttp 13952 19368 "GET /admin/auth/group/ HTTP/1.1" 200 7816
+INFO 2025-07-30 00:11:01,904 basehttp 13952 19368 "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-30 00:11:04,215 basehttp 13952 19368 "GET /admin/carbon_api/contactform/ HTTP/1.1" 200 8766
+INFO 2025-07-30 00:11:04,275 basehttp 13952 19368 "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-30 00:11:07,592 basehttp 13952 19368 "GET /admin/carbon_api/contactform/add/ HTTP/1.1" 200 11437
+INFO 2025-07-30 00:11:07,654 basehttp 13952 18308 "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-30 00:11:07,681 basehttp 13952 19368 "GET /static/admin/css/forms.css HTTP/1.1" 200 9047
+INFO 2025-07-30 00:11:07,686 basehttp 13952 15164 "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+INFO 2025-07-30 00:11:07,693 basehttp 13952 18308 "GET /static/admin/css/widgets.css HTTP/1.1" 200 11900
+INFO 2025-07-30 00:11:07,695 basehttp 13952 19368 "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO 2025-07-30 00:11:33,227 basehttp 13952 19368 "POST /admin/carbon_api/contactform/add/ HTTP/1.1" 200 11627
+INFO 2025-07-30 00:11:33,282 basehttp 13952 19368 "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-30 00:12:00,416 basehttp 13952 19368 "POST /admin/carbon_api/contactform/add/ HTTP/1.1" 302 0
+INFO 2025-07-30 00:12:00,473 basehttp 13952 19368 "GET /admin/carbon_api/contactform/ HTTP/1.1" 200 11175
+INFO 2025-07-30 00:12:00,532 basehttp 13952 19368 "GET /admin/jsi18n/ HTTP/1.1" 200 3343
