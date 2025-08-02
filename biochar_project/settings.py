@@ -2,6 +2,7 @@
 import os
 from pathlib import Path
 from decouple import config
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -63,19 +64,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'biochar_project.wsgi.application'
 
-# Database Configuration - PostgreSQL
+# Database Configuration - PostgreSQL with Render support
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME', default='biochar_db'),
-        'USER': config('DB_USER', default='biochar_user'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='5432'),
-        'OPTIONS': {
-            'connect_timeout': 60,
-        },
-    }
+    'default': dj_database_url.config(
+        default=f"postgresql://{config('DB_USER', default='biochar_user')}:{config('DB_PASSWORD', default='')}@{config('DB_HOST', default='localhost')}:{config('DB_PORT', default='5432')}/{config('DB_NAME', default='biochar_db')}",
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 }
 
 # Password validation
@@ -103,9 +98,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+
+# Remove STATICFILES_DIRS since we don't have a static folder
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static',
+# ]
+
+# Static files configuration for production
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media files
 MEDIA_URL = '/media/'
@@ -134,8 +134,6 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {
         'anon': '100/hour',
         'user': '1000/hour',
-        'contact': '10/hour',  # Specific rate for contact form
-        'purchase': '20/hour',  # Specific rate for purchases
     },
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
@@ -190,31 +188,13 @@ if not DEBUG:
     CSRF_COOKIE_SECURE = True
     SECURE_HSTS_PRELOAD = True
 
-# Logging Configuration
+# Logging Configuration (simplified for production)
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
-    },
     'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs' / 'django.log',
-            'formatter': 'verbose',
-        },
         'console': {
-            'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'formatter': 'simple',
         },
     },
     'root': {
@@ -222,37 +202,9 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['file'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': False,
         },
-        'apps.carbon_api': {
-            'handlers': ['file', 'console'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
     },
-}
-
-# Cache Configuration (Optional - for production)
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'cache_table',
-    }
-}
-
-# Session Configuration
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-SESSION_COOKIE_AGE = 86400  # 24 hours
-SESSION_COOKIE_HTTPONLY = True
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-
-# Custom Settings for Biochar Project
-BIOCHAR_SETTINGS = {
-    'MAX_CREDITS_PER_PURCHASE': 10000,
-    'MIN_CREDITS_PER_PURCHASE': 0.1,
-    'DEFAULT_CURRENCY': 'USD',
-    'ENABLE_EMAIL_NOTIFICATIONS': True,
-    'REQUIRE_EMAIL_VERIFICATION': False,
 }

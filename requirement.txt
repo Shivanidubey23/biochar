@@ -3,12 +3,6 @@ djangorestframework==3.14.0
 psycopg2-binary==2.9.7
 python-decouple==3.8
 django-cors-headers==4.3.1
-django-filter==23.3
-django-debug-toolbar==4.2.0
-pytest-django==4.5.2
-factory-boy==3.3.0
-drf-spectacular==0.26.5
-django-ratelimit==4.1.0
 whitenoise==6.6.0
-Pillow==10.0.1
-python-dateutil==2.8.2
+gunicorn==21.2.0
+dj-database-url==2.1.0
