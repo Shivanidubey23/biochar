@@ -1,9 +1,7 @@
-# Environment variables (CRITICAL - contains passwords/secrets)
-.env
-
-# Database
-db.sqlite3
-*.db
+# Virtual Environment
+venv/
+env/
+ENV/
 
 # Python
 __pycache__/
@@ -15,28 +13,23 @@ __pycache__/
 dist/
 build/
 
-# Virtual environment
-venv/
-env/
-ENV/
-
 # Django
 *.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media/
+staticfiles/
+
+# Environment variables
+.env
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
 
 # OS
 .DS_Store
 Thumbs.db
-
-# Static files (generated)
-staticfiles/
